@@ -436,7 +436,7 @@ type ProjectFile =
             if not !hasHintPath then
                 yield node.Attributes.["Include"].InnerText.Split(',').[0] ]
 
-    member this.DeletePaketNodes(name) =    
+    member this.DeletePaketNodes(name) =
         let nodesToDelete = this.FindPaketNodes(name)
         if nodesToDelete |> Seq.isEmpty |> not then
             verbosefn "    - Deleting Paket %s nodes" name
@@ -533,7 +533,7 @@ type ProjectFile =
         if nodesToDelete <> [] then
             verbosefn "    - Deleting custom projects nodes for %O" model.PackageName
 
-        for node in nodesToDelete do            
+        for node in nodesToDelete do
             node.ParentNode.RemoveChild(node) |> ignore
 
     member private this.GenerateAnalyzersXml(model:InstallModel) =
@@ -984,7 +984,7 @@ type ProjectFile =
 
         this.GetPropertyWithDefaults "OutputPath" startingData
         |> function
-            | None -> failwithf "Unable to find %s output path node in file %s" buildConfiguration this.FileName
+            | None -> failwithf "Unable to find %s output path node in file %s." buildConfiguration this.FileName
             | Some s -> s.TrimEnd [|'\\'|] |> normalizePath
 
     member this.GetAssemblyName () =

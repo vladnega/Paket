@@ -39,6 +39,13 @@ let ``should detect output path for proj file``
     |> shouldEqual (System.IO.Path.Combine(@"bin", configuration) |> normalizePath)
 
 [<Test>]
+let ``should detect output path for csproj file``() =
+    ProjectFile.TryLoad("./ProjectFile/TestData/ReleasePath.csprojtest").Value.GetOutputDirectory("Release")
+    |> shouldEqual ("bin" |> normalizePath)
+    ()
+    
+
+[<Test>]
 let ``should detect framework profile for ProjectWithConditions file`` () =
     ProjectFile.TryLoad("./ProjectFile/TestData/ProjectWithConditions.fsprojtest").Value.GetTargetProfile()
     |> shouldEqual (SinglePlatform(DotNetFramework(FrameworkVersion.V4_6)))
